@@ -8,9 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -75,12 +75,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == VOICE_RECOGNITION_REQUEST_CODE && resultCode == RESULT_OK) {
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            Toast.makeText(this, "Pesquisando por " + matches.get(1), Toast.LENGTH_LONG).show();
             String url = "https://www.google.com.br/search?q=" + matches.get(1);
             myWebView.loadUrl(url);
-            mList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, matches));
-            if (matches.contains("information")) {
-                informationMenu();
-            }
+//            mList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, matches));
+//            if (matches.contains("information")) {
+//                informationMenu();
+//            }
         }
     }
 
